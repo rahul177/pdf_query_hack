@@ -1,7 +1,3 @@
-
-#GROQ_API_KEY = "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"
-
-
 import os
 import pandas as pd
 import uuid
