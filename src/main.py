@@ -32,6 +32,16 @@ def get_mongo_client():
 
 # Authentication Pages
 def show_login_page():
+    """
+    Displays the login page for the PDF Analyzer application using Streamlit.
+    This function renders a login form where users can enter their username and password.
+    Upon submission, it authenticates the user using the UserManager. If authentication is
+    successful, a new session is created via the SessionManager, and relevant session state
+    variables are set. If authentication fails, an error message is displayed. The function
+    also provides an option for users to navigate to the registration page.
+    Returns:
+        None
+    """
     st.title("PDF Analyzer - Login")
     
     with st.form("login_form"):
@@ -54,6 +64,20 @@ def show_login_page():
         st.rerun()
 
 def show_register_page():
+    """
+    Displays the registration page for the PDF Analyzer application using Streamlit.
+    This function renders a registration form that allows users to create a new account by providing a username, email, password, and password confirmation. It performs basic validation to ensure that the passwords match. Upon successful registration, it updates the session state and reruns the app to reflect the changes. The function also provides an option for users to navigate to the login page if they already have an account.
+    UI Elements:
+        - Title: "PDF Analyzer - Register"
+        - Form fields: Username, Email, Password, Confirm Password
+        - Register button to submit the form
+        - Error messages for password mismatch or registration failure
+        - Success message upon successful registration
+        - Button to switch to the login page
+    Side Effects:
+        - Updates `st.session_state.show_register` to control page navigation
+        - Calls `st.rerun()` to refresh the Streamlit app after registration or navigation
+    """
     st.title("PDF Analyzer - Register")
     
     with st.form("register_form"):
@@ -80,6 +104,19 @@ def show_register_page():
         st.rerun()
 
 def show_settings_page():
+    """
+    Displays the user settings page in the Streamlit app, providing options for cache management and session management.
+    Features:
+        - Allows the user to clear their personal cache.
+        - Enables the user to log out from all devices by deleting their session records from the database.
+    Requires:
+        - `st.session_state.username` to be set for identifying the current user.
+        - `CacheManager.clear_user_cache` method for clearing user-specific cache.
+        - `get_mongo_client`, `mongo_config.mongo_db`, and `mongo_config.mongo_sessions_collection` for session management.
+    UI Elements:
+        - "Clear My Cache" button: Clears the user's cache and displays a success message.
+        - "Logout from all devices" button: Logs the user out from all devices and displays a success message.
+    """
     st.title("User Settings")
     
     # Cache Management
@@ -100,6 +137,21 @@ def show_settings_page():
 
 
 def main_application():
+    """
+    Main entry point for the PDF Analyzer Streamlit application.
+    This function manages the overall application flow, including user session management, PDF upload and processing,
+    question answering, PDF page viewing with highlights, and model evaluation. It sets up the Streamlit page configuration,
+    handles sidebar actions (logout, settings), and organizes the main interface into two tabs: PDF Analyzer and Retriever
+    Accuracy Check.
+    Key Features:
+    - User session and authentication management with logout and settings options.
+    - PDF upload, processing, and indexing for semantic search and retrieval.
+    - Interactive PDF viewer with page navigation and text highlighting based on search results.
+    - Question input and analysis, including query refinement, document retrieval, and answer generation.
+    - Display of query variations, retriever scores, and clickable results for PDF page viewing.
+    - Model evaluation tab for running and displaying comprehensive retrieval and QA metrics.
+    Session state is used extensively to maintain user-specific data, PDF processing status, and application state across reruns.
+    """
     st.set_page_config(page_title="PDF Analyzer", page_icon="📄", layout="wide")
     
     # Add a logout button to the sidebar
@@ -395,6 +447,13 @@ def main_application():
 
 # Main function to control page flow
 def main():
+    """
+    Main entry point for the application. Handles user session management and navigation between login, registration, and main application pages.
+
+    - If a session exists and is valid, proceeds to the main application.
+    - If the session is invalid, clears the session and shows the login page.
+    - If no session exists, shows the registration page if requested, otherwise shows the login page.
+    """
     # Check for existing session
     if "session_id" in st.session_state:
         valid, username = SessionManager.validate_session(st.session_state.session_id)

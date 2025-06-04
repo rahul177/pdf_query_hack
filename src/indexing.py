@@ -125,6 +125,25 @@ class ElementSummarizer:
         return element
 
 class PDFIndexer:
+    """
+    PDFIndexer is a class for parsing, processing, and indexing PDF documents into structured, searchable formats.
+    This class provides methods to:
+    - Parse PDF files while preserving their structure, extracting both text and images, and performing OCR on images.
+    - Process parsed elements into structured document chunks, summarizing tables and images, and tracking contextual metadata such as page, section, heading, figure, and table.
+    - Index processed documents into Qdrant (for vector search with OpenAI embeddings), create a BM25 retriever, and build a knowledge graph in Neo4j for advanced querying and relationship mapping.
+    Attributes:
+        summarizer (ElementSummarizer): Summarizes elements such as tables and images.
+        text_splitter (RecursiveCharacterTextSplitter): Splits large text blocks into manageable chunks.
+    Methods:
+        parse_pdf(pdf_path: str) -> List[Dict[str, Any]]:
+            Parses a PDF file, extracting structured elements and images (with OCR), and returns a list of element dictionaries.
+        process_elements(elements: List[Dict[str, Any]]) -> List[Document]:
+            Processes parsed elements into structured Document objects, summarizes content, tracks context, and splits large text blocks.
+        index_documents(documents: List[Document], collection_name: str) -> Dict[str, Any]:
+            Indexes documents into Qdrant (vector search), creates a BM25 retriever, and builds a knowledge graph in Neo4j.
+        _create_knowledge_graph(driver: GraphDatabase.driver, documents: List[Document]):
+            Internal method to create and populate a knowledge graph in Neo4j from the processed documents.
+    """
     def __init__(self):
         self.summarizer = ElementSummarizer()
         self.text_splitter = RecursiveCharacterTextSplitter(

@@ -19,6 +19,20 @@ def get_mongo_client():
     return MongoClient(mongo_config.mongo_uri)
 
 class UserManager:
+    """
+    UserManager provides static methods for user authentication and management.
+    Methods:
+        hash_password(password: str) -> str:
+            Hashes a plain text password using bcrypt.
+        verify_password(plain_password: str, hashed_password: str) -> bool:
+            Verifies a plain text password against a hashed password using bcrypt.
+        create_user(username: str, password: str, email: str) -> Tuple[bool, str]:
+            Creates a new user in the MongoDB database with the given username, password, and email.
+            Returns a tuple indicating success status and a message.
+        authenticate_user(username: str, password: str) -> Tuple[bool, str]:
+            Authenticates a user by verifying the provided password against the stored hash.
+            Returns a tuple indicating authentication status and a message.
+    """
     @staticmethod
     def hash_password(password: str) -> str:
         return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
@@ -94,6 +108,19 @@ class UserManager:
         
 # Session Management
 class SessionManager:
+    """
+    SessionManager provides static methods for managing user sessions using a MongoDB backend.
+    Methods:
+        create_session(username: str, expires_hours: int = 24) -> str
+            Creates a new session for the specified username with an optional expiration time (in hours).
+            Stores the session in the MongoDB collection and returns the generated session ID.
+        validate_session(session_id: str) -> Tuple[bool, Optional[str]]
+            Validates the provided session ID by checking its existence and expiration in the MongoDB collection.
+            Returns a tuple (is_valid, username), where is_valid is a boolean indicating session validity,
+            and username is the associated username if valid, otherwise None.
+        delete_session(session_id: str)
+            Deletes the session with the specified session ID from the MongoDB collection.
+    """
     @staticmethod
     def create_session(username: str, expires_hours: int = 24) -> str:
         session_id = secrets.token_urlsafe(32)
@@ -137,6 +164,17 @@ class SessionManager:
 
 # Cache Management
 class CacheManager:
+    """
+    CacheManager provides static methods to manage user-specific cache data in a MongoDB collection.
+    Methods:
+        get_user_cache(username: str) -> Dict[str, Any]:
+            Retrieves the cache data for a given username from the MongoDB cache collection.
+            Returns an empty dictionary if no cache is found for the user.
+        update_user_cache(username: str, cache_data: Dict[str, Any]):
+            Updates or inserts the cache data for a given username in the MongoDB cache collection.
+        clear_user_cache(username: str):
+            Removes the cache entry for a given username from the MongoDB cache collection.
+    """
     @staticmethod
     def get_user_cache(username: str) -> Dict[str, Any]:
         with get_mongo_client() as client:

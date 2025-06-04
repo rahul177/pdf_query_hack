@@ -42,6 +42,18 @@ config = Config(
 mongo_config = MongoDBConfig()
 
 def init_mongo_collections():
+    """
+    Initializes MongoDB collections and indexes required for the application.
+    This function connects to the MongoDB database using the configured client and ensures
+    that the necessary collections (users, sessions, cache) exist. If any collection does not exist,
+    it is created. Additionally, the function sets up the following indexes:
+    - A unique index on the "username" field in the users collection.
+    - A unique index on the "session_id" field in the sessions collection.
+    - An expiring index on the "expires_at" field in the sessions collection, which automatically
+        removes documents after their expiration time.
+    Raises:
+            pymongo.errors.PyMongoError: If there is an error creating collections or indexes.
+    """
     with get_mongo_client() as client:
         db = client[mongo_config.mongo_db]
         # Create collections if they don't exist

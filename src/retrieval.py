@@ -22,6 +22,33 @@ else:
     langfuse = None
 
 class QueryProcessor:
+    """
+    QueryProcessor is a class designed to handle advanced query processing and hybrid document retrieval for semantic search applications.
+    Core Responsibilities:
+    - Translates user queries into optimized search terms using LLM-based prompt templates.
+    - Expands queries by generating multiple high-quality variations from different perspectives.
+    - Routes each query variation to determine optimal weights for keyword, vector, and knowledge graph search strategies.
+    - Performs hybrid retrieval using Qdrant (for keyword and vector search) and Neo4j (for knowledge graph search).
+    - Deduplicates and reranks retrieved documents using LLM-based relevance scoring.
+    Key Methods:
+    - process_query(query: str) -> Tuple[List[Dict[str, Any]], str]:
+        Processes a user query through translation, expansion, and routing, returning weighted query variations and the translated query.
+    - retrieve_documents(queries_with_weights: List[Dict[str, Any]], collection_name: str, top_k: int = 10) -> List[Document]:
+        Executes hybrid retrieval across all search methods, deduplicates, and reranks results.
+    - _translate_query(query: str) -> str:
+        Uses an LLM prompt to translate the query for optimal search effectiveness.
+    - _expand_query(query: str) -> List[str]:
+        Generates up to three query variations from different perspectives.
+    - _route_query(query: str) -> Dict[str, float]:
+        Determines the optimal search strategy weights for the query.
+    - _keyword_search(...), _vector_search(...), _kg_search(...):
+        Internal methods for performing keyword, vector, and knowledge graph searches, respectively.
+    - _deduplicate_and_rerank(query: str, documents: List[Document], top_k: int) -> List[Document]:
+        Removes duplicate documents and reranks them using an LLM.
+    Dependencies:
+    - Requires configuration for OpenAI API, Qdrant, and Neo4j.
+    - Utilizes prompt templates and LLM chains for query processing and reranking.
+    """
     def __init__(self):
         self.llm = ChatOpenAI(model="gpt-4o", temperature=0, api_key=config.openai_api_key)
         self.embedder = OpenAIEmbeddings(model="text-embedding-3-small", api_key=config.openai_api_key)

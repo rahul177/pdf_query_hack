@@ -4,6 +4,22 @@ from typing import List, Dict, Any
 from langchain_core.documents import Document
 
 class ModelEvaluator:
+            """
+            ModelEvaluator is a utility class for evaluating the performance of a question-answering model using a small, predefined dataset.
+            Attributes:
+                sample_data (list): A list of dictionaries, each containing a question, context, answer, and page number for evaluation.
+                metrics (dict): A dictionary to store evaluation metrics such as precision, recall, F1 score, and Mean Reciprocal Rank (MRR).
+            Methods:
+                _create_sample_dataset():
+                    Creates and returns a small evaluation dataset with questions, contexts, answers, and page numbers.
+                _normalize_text(text):
+                    Normalizes input text by converting it to lowercase and removing punctuation for fair comparison.
+                _calculate_mrr(results):
+                    Calculates the Mean Reciprocal Rank (MRR) based on the provided results.
+                evaluate_model(query_processor, response_gen):
+                    Evaluates the provided model using the sample dataset. It generates responses, extracts answers, and computes precision, recall, F1 score, and MRR.
+                    Returns a dictionary containing the computed metrics and detailed results for each sample.
+            """
             def __init__(self):
                 self.sample_data = self._create_sample_dataset()
                 self.metrics = {
