@@ -6,6 +6,15 @@ from config import mongo_config
 from typing import Tuple, Optional, Dict, Any
 from utils import *
 
+if config.langfuse_public_key and config.langfuse_secret_key:
+    langfuse = Langfuse(
+        public_key=config.langfuse_public_key,
+        secret_key=config.langfuse_secret_key,
+        host=config.langfuse_host
+    )
+else:
+    langfuse = None
+
 def get_mongo_client():
     return MongoClient(mongo_config.mongo_uri)
 

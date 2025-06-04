@@ -12,7 +12,14 @@ from qdrant_client.http import models
 import os
 import streamlit as st
 
-
+if config.langfuse_public_key and config.langfuse_secret_key:
+    langfuse = Langfuse(
+        public_key=config.langfuse_public_key,
+        secret_key=config.langfuse_secret_key,
+        host=config.langfuse_host
+    )
+else:
+    langfuse = None
 
 class QueryProcessor:
     def __init__(self):

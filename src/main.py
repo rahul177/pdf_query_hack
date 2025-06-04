@@ -16,6 +16,15 @@ import re
 from langchain_core.documents import Document
 from sklearn.metrics import precision_score, recall_score, f1_score
 
+if config.langfuse_public_key and config.langfuse_secret_key:
+    langfuse = Langfuse(
+        public_key=config.langfuse_public_key,
+        secret_key=config.langfuse_secret_key,
+        host=config.langfuse_host
+    )
+else:
+    langfuse = None
+
 os.makedirs(config.upload_folder, exist_ok=True)
 
 def get_mongo_client():

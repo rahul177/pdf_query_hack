@@ -22,6 +22,15 @@ from unstructured.partition.pdf import partition_pdf
 from unstructured.staging.base import convert_to_dict
 import streamlit as st
 
+if config.langfuse_public_key and config.langfuse_secret_key:
+    langfuse = Langfuse(
+        public_key=config.langfuse_public_key,
+        secret_key=config.langfuse_secret_key,
+        host=config.langfuse_host
+    )
+else:
+    langfuse = None
+
 class ElementSummarizer:
     def __init__(self):
         self.table_llm = ChatGroq(model="llama3-70b-8192", temperature=0, api_key=config.groq_api_key)
@@ -77,7 +86,7 @@ class ElementSummarizer:
     
     def summarize(self, element: Dict[str, Any]) -> Dict[str, Any]:
         if element["type"] == "table":
-            trace = start_trace.langfuse.trace(name="table_summarization") if start_trace.langfuse else None
+            trace = langfuse.trace(name="table_summarization") if langfuse else None
             generation = trace.generation(
                 name="summarize_table",
                 input={"element_content": element.get("metadata", {}).get("table_as_html", "")[:1000]},
@@ -96,7 +105,7 @@ class ElementSummarizer:
             }
             
         elif element["type"] == "image":
-            trace = start_trace.langfuse.trace(name="image_summarization") if start_trace.langfuse else None
+            trace = langfuse.trace(name="image_summarization") if langfuse else None
             generation = trace.generation(
                 name="summarize_image",
                 input={"element_content": element.get("text", "")[:1000]},
