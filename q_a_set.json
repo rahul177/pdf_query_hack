@@ -1,0 +1,122 @@
+[
+  {
+    "question": "What is the capital of France?",
+    "context": "France is a country in Europe. Its capital is Paris, which is known for its art, fashion, and culture.",
+    "answer": "Paris",
+    "page": 1
+  },
+  {
+    "question": "When was the Declaration of Independence signed?",
+    "context": "The Declaration of Independence was signed on August 2, 1776, though it was adopted on July 4th.",
+    "answer": "August 2, 1776",
+    "page": 2
+  },
+  {
+    "question": "What is the chemical symbol for gold?",
+    "context": "Gold is a chemical element with the symbol Au (from Latin: aurum) and atomic number 79.",
+    "answer": "Au",
+    "page": 3
+  },
+  {
+    "question": "Who wrote 'Romeo and Juliet'?",
+    "context": "William Shakespeare, the famous English playwright, wrote 'Romeo and Juliet' in the late 16th century.",
+    "answer": "William Shakespeare",
+    "page": 4
+  },
+  {
+    "question": "What is the largest planet in our solar system?",
+    "context": "Jupiter is the largest planet in our solar system, with a mass more than two and a half times that of all other planets combined.",
+    "answer": "Jupiter",
+    "page": 5
+  },
+  {
+    "question": "What is the boiling point of water at sea level?",
+    "context": "At sea level, water boils at 100 degrees Celsius (212 degrees Fahrenheit) under standard atmospheric pressure.",
+    "answer": "100 degrees Celsius",
+    "page": 6
+  },
+  {
+    "question": "Who painted the Mona Lisa?",
+    "context": "The Mona Lisa was painted by the Italian Renaissance artist Leonardo da Vinci in the early 16th century.",
+    "answer": "Leonardo da Vinci",
+    "page": 7
+  },
+  {
+    "question": "What is the main component of the Sun?",
+    "context": "The Sun is primarily composed of hydrogen (about 73%) and helium (about 25%), with trace amounts of heavier elements.",
+    "answer": "Hydrogen",
+    "page": 8
+  },
+  {
+    "question": "What year did World War II end?",
+    "context": "World War II officially ended on September 2, 1945, when Japan formally surrendered aboard the USS Missouri.",
+    "answer": "1945",
+    "page": 9
+  },
+  {
+    "question": "What is the tallest mountain on Earth?",
+    "context": "Mount Everest, located in the Mahalangur Himal sub-range of the Himalayas, is Earth's highest mountain above sea level at 8,848 meters.",
+    "answer": "Mount Everest",
+    "page": 10
+  },
+  {
+    "question": "Who invented the telephone?",
+    "context": "Alexander Graham Bell is credited with inventing the first practical telephone in 1876, though there were other inventors working on similar technologies.",
+    "answer": "Alexander Graham Bell",
+    "page": 11
+  },
+  {
+    "question": "What is the currency of Japan?",
+    "context": "The official currency of Japan is the yen, denoted by the symbol ¥ and the code JPY.",
+    "answer": "Yen",
+    "page": 12
+  },
+  {
+    "question": "How many continents are there?",
+    "context": "There are seven continents: Africa, Antarctica, Asia, Europe, North America, South America, and Australia/Oceania.",
+    "answer": "7",
+    "page": 13
+  },
+  {
+    "question": "What is photosynthesis?",
+    "context": "Photosynthesis is the process by which green plants and some other organisms use sunlight to synthesize foods with carbon dioxide and water, generating oxygen as a byproduct.",
+    "answer": "Process plants use sunlight to make food",
+    "page": 14
+  },
+  {
+    "question": "Who was the first president of the United States?",
+    "context": "George Washington, a Founding Father and commander of the Continental Army, became the first president of the United States in 1789.",
+    "answer": "George Washington",
+    "page": 15
+  },
+  {
+    "question": "What is the speed of light in a vacuum?",
+    "context": "The speed of light in a vacuum is approximately 299,792 kilometers per second (186,282 miles per second).",
+    "answer": "299,792 km/s",
+    "page": 16
+  },
+  {
+    "question": "What is the largest ocean on Earth?",
+    "context": "The Pacific Ocean is the largest and deepest of Earth's oceanic divisions, covering about 63 million square miles.",
+    "answer": "Pacific Ocean",
+    "page": 17
+  },
+  {
+    "question": "Who discovered penicillin?",
+    "context": "Scottish scientist Alexander Fleming discovered penicillin in 1928, the world's first antibiotic substance.",
+    "answer": "Alexander Fleming",
+    "page": 18
+  },
+  {
+    "question": "What is the capital of Australia?",
+    "context": "Canberra is the capital city of Australia, located in the Australian Capital Territory inland from the country's southeast coast.",
+    "answer": "Canberra",
+    "page": 19
+  },
+  {
+    "question": "How many bones are in the adult human body?",
+    "context": "The adult human skeleton typically consists of 206 bones, though this number can vary slightly between individuals.",
+    "answer": "206",
+    "page": 20
+  }
+]
